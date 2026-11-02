@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="da">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portfolio</title>
+
+  <link rel="stylesheet" href="projekt3.css">
+  <link rel="stylesheet" href="custom-cursor.css">
+  <link rel="stylesheet" href="https://use.typekit.net/vjb1ziv.css">
+  <script src="custom-cursor.js" defer></script>
+  <link rel="icon" type="image/png" href="billeder/favicon.png">
+
+</head>
+<body>
+
+  <div class="layout">
+    <aside class="sidebar">
+      <div class="top">
+        <div class="logo">
+            <a href="index.html" aria-label="Gå til forsiden">
+                <img src="billeder/logo.svg" alt="Logo">
+            </a>
+        </div>
+
+        <nav class="menu">
+          <a href="projekter.html">Mine projekter</a>
+          <a href="kontakt.html">Kontakt</a>
+        </nav>
+      </div>
+    </aside>
+
+    <div class="content">
+      <div class="hero">
+        <video class="content-video" autoplay muted playsinline>
+          <source src="video/titellille.mp4" type="video/mp4">
+        </video>
+      </div>
+<section class="full-img"> 
+  <a href="http://lille-nor-eksamen.natasjaloevschall.dk/" target="_blank">
+  <img src="billeder/del2.png" alt="Beskrivelse">
+</a>
+
+
+  <div class="full-img-content fade-in">
+    <h2>Projektbeskrivelse</h2>
+    <p>
+      Lille Nor er en charmerende secondhand-butik i Aarhus C med fokus på brugt børnetøj til alderen 0-8 år. 
+      I vores projekt arbejdede vi med at optimere butikkens bookingflow og styrke den visuelle identitet, 
+      så den i højere grad afspejlede både univers og målgruppe.
+
+      <br><br>
+
+      Jeg havde ansvaret for udviklingen af de enkelte visuelle elementer, som er designet på baggrund af værdiordene
+      nærværende, æstetisk, organisk, kvalitetsbevidst og legende. 
+      Resultatet ses herunder.
+      <br><br>
+      *Klik på billedet for at se prototypen
+  </div>
+</section>
+<section class="center-image-section reveal-section">
+  <div class="section-overlay">
+    <h2>Visuel identitet</h2>
+  </div>
+
+  <div class="content-wrapper">
+    <img src="billeder/styletile.png" alt="Beskrivelse af billede">
+  </div>
+</section>
+
+
+<section class="square-gallery reveal-section">
+  <div class="section-overlay">
+    <h2>Mockups</h2>
+  </div>
+
+  <div class="square-gallery__grid">
+    <img src="billeder/lillenorcom.jpg">
+    <img src="billeder/skilt.png">
+    <img src="billeder/lillenorvisit.jpg">
+    <img src="billeder/baglille.jpg">
+    <img src="billeder/flyer.jpg">
+    <img src="billeder/lillenortele.jpg">
+  </div>
+</section>
+
+<section class="full-img2">
+  <img class="bg-image" src="billeder/del5.png" alt="Baggrund">
+
+     <div id="teddy-default">
+      <img id="teddy-img" src="billeder/bamsevinker_show.gif" alt="Animation af en bamse der vinker">
+    </div>
+    <div class="section-text fade-in">
+  <h2>Designvalg</h2>
+  <p>I udviklingen af den visuelle identitet omsatte jeg butikkens værdier
+     til bevidste designvalg. De varme jordfarver og afrundede former skaber
+      et trygt udtryk, mens den organiske overskrift og letlæselige brødtekst
+       balancerer identitet og funktionalitet. <br><br>Bien og bamsen fungerer som
+        visuelle virkemidler, der tilfører en legende dimension og tydeliggør
+         målretningen mod børn. Samlet set skaber elementerne en sammenhængende
+          og æstetisk helhed med en klar visuel rød tråd.
+    </p>
+</div>
+<div class="afslutning">
+  <h2>Tak for at se med</h2>
+  <p>Alle elementer er lavet i Adobe Creative Suite.</p>
+</div>
+</section>
+
+
+
+
+
+
+
+  </div>
+<script>
+    const fadeEls = document.querySelectorAll(".fade-in");
+
+const fadeObserver = new IntersectionObserver((entries, observer) => {
+  entries.forEach(entry => {
+    if(entry.isIntersecting){
+      entry.target.classList.add("is-visible");
+      observer.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.4 });
+
+fadeEls.forEach(el => fadeObserver.observe(el));
+
+
+const revealSections = document.querySelectorAll(".reveal-section");
+
+const revealObserver = new IntersectionObserver((entries, observer) => {
+  entries.forEach(entry => {
+    if(entry.isIntersecting){
+      const overlay = entry.target.querySelector(".section-overlay");
+
+      setTimeout(() => {
+        overlay.classList.add("is-hidden");
+      }, 1000); // 1,5 sek delay
+
+      observer.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.5 });
+
+revealSections.forEach(section => revealObserver.observe(section));
+
+
+    </script>
+
+</body>
+</html>

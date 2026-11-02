@@ -1,0 +1,365 @@
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+body{
+  font-family: "futura-pt", sans-serif;
+  background:#fbfbfb;
+  color:#111;
+
+}
+
+/* --------------------
+   LAYOUT
+-------------------- */
+.layout{
+  min-height:100vh;
+  display:grid;
+  grid-template-columns: 220px 1fr;
+}
+
+/* --------------------
+   SIDEBAR (sticky)
+-------------------- */
+.sidebar{
+  border-right: 1px solid rgba(0,0,0,.25);
+  background: rgba(28,28,28,0.05);
+  padding: 28px 22px;
+
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+
+  position: sticky;
+  top: 0;
+  height: 100vh;
+}
+
+.logo a{
+  display: flex;
+  width: 100%;
+  height: 100%;
+}
+
+.logo img{
+  width:90px;
+  height:90px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.menu{
+  margin-top:60px;
+  display:flex;
+  flex-direction:column;
+  gap:20px;
+}
+
+.menu a{
+  text-decoration:none;
+  font-size:19px;
+  font-weight:200;
+  color:#4b2d41;
+}
+
+.menu a::after {
+    content: "";
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.menu a:hover::after {
+    content: ".";
+    opacity: 1;
+}
+.profile img{
+  width: 100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+}
+/* --------------------
+   CONTENT
+-------------------- */
+.content{
+  display:flex;
+  flex-direction:column;
+}
+
+.hero {
+  position: relative;
+  height: 100vh;
+  overflow: hidden;
+  width: 100%;
+}
+
+.content-video {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+
+  height: 90%;
+  width: 80%;
+
+  transform: translate(-50%, -50%);
+  object-fit: cover;
+  object-position: center;
+}
+
+/* =============== Fifty/Fifty Section =============== */
+.fifty-section{
+  padding: 40px 48px;
+  display:grid;
+  grid-template-columns: 1fr 1fr;
+  gap:32px;
+  align-items:center;
+
+  min-height:100vh;
+  background:#f1f1f1;
+
+  position: relative; /* overlay anchor */
+  overflow: hidden;
+}
+
+.fifty-left{
+  display:flex;
+  align-items:center;
+  position: relative;
+  z-index: 1;
+}
+
+.fifty-left img{
+  width:60%;
+  height:auto;
+  margin-left:80px;
+  object-fit:cover;
+}
+
+.fifty-right{
+  display:flex;
+  justify-content:flex-start;
+  position: relative;
+  z-index: 1;
+}
+
+/* =============== Carousel =============== */
+.carousel{
+  width:100%;
+  max-width:500px;
+}
+
+.carousel-viewport{
+  width:100%;
+  aspect-ratio: 1 / 1;
+  overflow:hidden;
+  position:relative;
+  background:#000;
+}
+
+.carousel-slide{ display:none; width:100%; height:100%; }
+.carousel-slide.is-active{ display:block; width:100%; height:100%; }
+
+.carousel-media{
+  width:100%;
+  height:100%;
+  display:block;
+  object-fit:cover;
+}
+
+.carousel-controls{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:14px;
+  margin-top:10px;
+}
+
+.arrow-btn{
+  border:none;
+  background:transparent;
+  cursor:pointer;
+  color:#8a8a8a;
+  font-size:18px;
+  line-height:1;
+  padding:4px 6px;
+}
+
+/* =============== Curtain Overlay =============== */
+.pf-overlay{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  background:#d5d5d4f5;
+  z-index:50;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  transform: translateY(0);
+  transition: transform 1.2s cubic-bezier(0.77, 0, 0.175, 1);
+}
+
+.pf-overlay.is-hidden{
+  transform: translateY(100%);
+  pointer-events:none;
+}
+
+.pf-overlay-inner{
+  text-align:center;
+  padding:24px;
+}
+
+.pf-overlay-inner h2{
+  font-size: 1.5rem;
+  margin-bottom: 50px;
+  font-weight: 500;
+  font-style: normal;
+  color: #fff;
+}
+
+.pf-overlay-image{
+  max-width:400px;
+  height:auto;
+}
+
+/* Mobil */
+@media (max-width: 900px){
+  .fifty-section{
+    padding: 28px 18px;
+    grid-template-columns: 1fr;
+  }
+  .fifty-right{ justify-content:center; }
+  .fifty-left img{
+    margin-left:0;
+    width:70%;
+  }
+}
+
+/* 100vh sektion */
+.vh-intro-video{
+  min-height: 100vh;
+  background: #fbfbfb; /* lys grå */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+ 
+}
+
+/* container */
+.vh-intro-video__inner{
+  width: min(400px, 60vw);
+  aspect-ratio: 1 / 1; /* kvadratisk som på dit screenshot */
+  background: #fff;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* selve videoen */
+.vh-intro-video__media{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  
+}
+
+/* Sektionen skal være reference */
+#carousel-section {
+  position: relative;
+  overflow: hidden; /* vigtigt */
+}
+
+/* Sørg for at sektionen er relative */
+#carousel-section {
+  position: relative;
+  overflow: hidden;
+}
+/* -------------------- CYLINDER SECTION (KUN ÉN GANG) -------------------- */
+.cyl-sec{
+  height: 40vh; /* du havde både 30vh og 40vh – jeg valgte 40vh */
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  background-color: #f0f0f0;
+}
+
+.cyl-scene{
+  width: min(1100px, 50vw);
+  height: 100%;
+  position: relative;
+  perspective: 1200px;
+  perspective-origin: 50% 45%;
+  transform: translateY(40px);
+}
+.cyl-stage{
+  display: flex;
+  flex-direction: column;
+  align-items: center;   /* <-- centrerer teksten horisontalt ift cylinderen */
+  justify-content: center;
+  grid-gap: 150px;
+}
+
+
+.cyl-cylinder{
+  --radius: 180px;
+  --tiltX: -5deg; /* du havde -4 og -5 – jeg valgte -5 */
+
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  inset: 0;
+
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+.cyl-card{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+
+  width: min(160px, 4vw);
+  aspect-ratio: 1 / 1;
+
+  transform-style: preserve-3d;
+
+  margin: 0;
+  border-radius: 0px;
+  overflow: hidden;
+}
+
+.cyl-card img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+@media (max-width: 700px){
+  .cyl-scene{
+    height: min(520px, 68vh);
+    perspective: 900px;
+  }
+  .cyl-cylinder{ --radius: 360px; }
+  .cyl-card{ width: min(420px, 78vw); }
+}
+
+@media (prefers-reduced-motion: reduce){
+  .cyl-cylinder{ will-change: auto; }
+}
+
+.cyl-text{
+  
+  text-align: center;
+  font-size: 16px;
+  letter-spacing: 1px;
+  opacity: 0.7;
+}

@@ -1,0 +1,182 @@
+/* --------------------
+   RESET
+-------------------- */
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+body{
+  font-family: "prestige-elite-std", serif;
+  background:#fbfbfb;
+  color:#111;
+
+}
+
+/* --------------------
+   LAYOUT
+-------------------- */
+.layout{
+  min-height:100vh;
+  display:grid;
+  grid-template-columns: 220px 1fr;
+}
+
+/* --------------------
+   SIDEBAR (sticky)
+-------------------- */
+.sidebar{
+  border-right: 1px solid rgba(0,0,0,.25);
+  background: rgba(28,28,28,0.05);
+  padding: 28px 22px;
+
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+
+  position: sticky;
+  top: 0;
+  height: 100vh;
+}
+
+.logo a{
+  display: flex;
+  width: 100%;
+  height: 100%;
+}
+
+.logo img{
+  width:90px;
+  height:90px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.menu{
+  margin-top:60px;
+  display:flex;
+  flex-direction:column;
+  gap:20px;
+}
+
+.menu a{
+  text-decoration:none;
+  font-family: 'futura-pt', sans-serif;
+  font-size:19px;
+  font-weight:200;
+  color:#4b2d41;
+}
+
+.menu a::after {
+    content: "";
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.menu a:hover::after {
+    content: ".";
+    opacity: 1;
+}
+
+
+.profile img{
+  width: 100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+}
+.contact-section {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 100px 20px;
+}
+
+.contact-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    width: 100%;
+    align-items: center;
+}
+
+/* Visitkort størrelse */
+.contact-card {
+    background: #e9e9e9;
+    width: min(600px, 90%);
+    padding: 40px 50px;
+    height: 270px;
+}
+
+/* Øverste kort layout */
+.contact-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 40px;
+}
+
+.contact-text {
+    flex: 1;
+}
+
+.contact-info-grid {
+    display: grid;
+    grid-template-columns: 100px 1fr;
+    margin-bottom: 25px;
+    font-size: 13px;
+    letter-spacing: 1px;
+}
+
+.contact-label {
+    font-weight: 600;
+    opacity: 0.6;
+}
+
+.contact-motivation {
+    font-size: 14px;
+    line-height: 1.6;
+    max-width: 320px;
+}
+
+/* Billede */
+.contact-image img {
+    width: 120px;
+    height: 140px;
+    object-fit: cover;
+    border-radius: 6px;
+}
+
+/* Nederste kort */
+ 
+
+.contact-card-bottom {
+    width: min(600px, 90%);
+    height: 270px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+    padding: 30px;
+}
+
+.contact-card-bottom h1 {
+    margin: 0;
+     font-size: 74px;
+    font-weight: 700;
+    font-family: 'articuleta', sans-serif;
+    color: #4b2d41;
+
+}
+
+.contact-email {
+    color: inherit;          /* bruger samme farve som teksten */
+    text-decoration: none;   /* fjerner underline */
+}
+
+.contact-email:hover {
+    text-decoration: underline;  /* subtle hover-effekt */
+}
+

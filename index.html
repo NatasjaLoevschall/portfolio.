@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="da">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portfolio</title>
+
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="custom-cursor.css">
+  <link rel="stylesheet" href="https://use.typekit.net/vjb1ziv.css">
+  <script src="script.js" defer></script>
+  <script src="custom-cursor.js" defer></script>
+  <link rel="icon" type="image/png" href="billeder/favicon.png">
+
+</head>
+<body>
+
+
+
+  <div class="layout">
+    <aside class="sidebar">
+        <div class="sidebar-intro" aria-hidden="true">
+    <img class="sidebar-intro-logo" src="billeder/logo.svg" alt="">
+    <p class="sidebar-intro-title">Portfolio</p>
+  </div>
+      <div class="top">
+        <div class="logo">
+           <a href="index.html" aria-label="Gå til forsiden">
+                <img src="billeder/logo.svg" alt="Logo">
+            </a>
+        </div>
+        <nav class="menu">
+          <a href="projekter.html">Mine projekter</a>
+          <a href="kontakt.html">Kontakt</a>
+        </nav>
+      </div>
+
+    </aside>
+
+    <div class="content">
+      <div class="hero">
+
+  <!-- Forsidebillede -->
+  <img class="hero-background" src="billeder/forsidebillede.jpg" alt="Portræt af mig">
+
+  <!-- Billeder der bevæger sig -->
+  <div class="floating-images">
+
+    <video class="floating-image floating-image--large" autoplay muted loop playsinline preload="metadata" aria-hidden="true">
+      <source src="video/katetryon.mp4" type="video/mp4">
+    </video>
+    <img src="billeder/weekday.png" class="floating-image" alt="">
+    <img src="billeder/ems5.jpg" class="floating-image" alt="">
+    <video class="floating-image floating-image--large" autoplay muted loop playsinline preload="metadata" aria-hidden="true">
+      <source src="video/chillforside.mov" type="video/mp4">
+    </video>
+    <img src="billeder/stol.png" class="floating-image" alt="">
+    <img src="billeder/becs5.jpg" class="floating-image" alt="">
+    <img src="billeder/oscartshirtpå.png" class="floating-image" alt="">
+    <img src="billeder/becs2.jpg" class="floating-image" alt="">
+
+  </div>
+
+</div>
+     <section class="pf-stage pf-stage--mockups">
+  <section class="mockup-area pf-wrapper pf-scroll-reveal" id="mockups">
+
+  <div class="pf-overlay" aria-hidden="true">
+  <h2 class="pf-overlay-title">
+    <span>Magasin om mig.</span>
+  </h2>
+
+  <div class="pf-overlay-right">
+    *TRYK på magasinet til højre for at lære mig bedre at kende.
+  </div>
+</div>
+
+
+    <section class="mockup-wrap">
+      <figure class="mockup-panel mockup-panel--static reveal">
+        <img src="billeder/forside.png" alt="Forside mockup">
+      </figure>
+
+      <figure class="mockup-panel mockup-panel--slider reveal">
+        <div class="mockup-slider" id="sliderWrapper">
+          <button class="overlay-close" type="button" aria-label="Luk">×</button>
+          <img id="sliderImg" src="billeder/side23.png" alt="Opslag side 2-3">
+          <button class="mockup-nav mockup-nav--prev" type="button" id="prevBtn">‹</button>
+          <button class="mockup-nav mockup-nav--next" type="button" id="nextBtn">›</button>
+          <div class="mockup-dots" id="dots" aria-hidden="true"></div>
+        </div>
+      </figure>
+    </section>
+
+  </section>
+</section>
+
+<section class="pf-stage">
+  <section class="pf-wrapper pf-scroll-reveal" id="mine-projekter">
+    <div class="pf-overlay" aria-hidden="true">
+      <h2 class="pf-overlay-title">
+        <span>Mine</span>
+        <span>projekter.</span>
+      </h2>
+    </div>
+
+  <section class="pf-grid pf-carousel">
+
+            <a class="pf-card" href="projekt1.html" aria-label="SO-ME CONTENT">
+              <div class="pf-video-wrapper">
+                <img class="pf-img pf-video-thumb" src="billeder/kateprojekt.png" alt="Projekt 2">
+
+                <video class="pf-img pf-hover-video" muted playsinline preload="metadata">
+                  <source src="video/pink1.mp4" type="video/mp4">
+                </video>
+              </div>
+
+              <h3 class="pf-title">The power of a piece of fabric</h3>
+              <p class="pf-text">Artdirection / foto og video. <br><br>I dette hobby-projekt har jeg haft ansvar for hele den kreative proces – fra design af kollektionen til udvikling af den visuelle retning. Jeg har arbejdet med art direction, styling og fotografisk udtryk. Alle animationer, billeder og video er redigeret i Adobe Creative Suite.</p>
+            </a>
+
+            <a class="pf-card" href="projekt2.html" aria-label="SO-ME CONTENT">
+              <div class="pf-video-wrapper">
+                <img class="pf-img pf-video-thumb" src="billeder/oscarned1.png" alt="Projekt 2">
+
+                <video class="pf-img pf-hover-video" muted playsinline preload="metadata">
+                  <source src="video/emestudios.mp4" type="video/mp4">
+                </video>
+              </div>
+
+              <h3 class="pf-title">SO-ME content</h3>
+              <p class="pf-text">Artdirection / foto og video.<br><br>Dette hobby-projekt tager afsæt i etablerede branduniverser; Weekday, EMESTUDIOS, about:blank - og demonstrerer min forståelse for visuel strategi og brandkonsistens. Alle animationer, billeder og video er redigeret i Adobe Creative Suite.</p>
+            </a>
+
+            <a class="pf-card" href="internship-ay.html" aria-label="Se mit internship hos AY Studios">
+              <div class="pf-video-wrapper">
+                <img class="pf-img pf-video-thumb" src="billeder/ayforside.jpg" alt="Internship hos AY Studios">
+
+                <video class="pf-img pf-hover-video pf-hover-video--bottom" data-trim-end="1" muted playsinline preload="metadata">
+                  <source src="video/drop.mov" type="video/mp4">
+                </video>
+              </div>
+
+              <h3 class="pf-title">Internship AY Studios</h3>
+              <p class="pf-text">Portfolio / visuel identitet. <br><br>Se flere af mine projekter samlet i et portfoliooverblik. Her kan du gå på opdagelse i mit arbejde med storytelling, foto, video og digitalt design.</p>
+            </a>
+
+            <a class="pf-card" href="projekt3.html" aria-label="SO-ME CONTENT">
+              <div class="pf-video-wrapper">
+                <img class="pf-img pf-video-thumb" src="billeder/lillenor.jpg" alt="Projekt 2">
+
+                <video class="pf-img pf-hover-video" muted playsinline preload="metadata">
+                  <source src="video/projektlille.mp4" type="video/mp4">
+                </video>
+              </div>
+
+              <h3 class="pf-title">Visuel identitet til website</h3>
+              <p class="pf-text">Visuel identitet. <br><br>I dette skole-projekt har jeg sammen med tre andre arbejdet med at løse en digital problematik for butikken Lille Nor. Her har min primære opgave været at redesigne deres nuværende visuelle identitet, og sikre at den stemmer overens med deres brand og målgruppe.</p>
+            </a>
+
+          </section> <!-- /pf-grid pf-carousel -->
+  </section>
+</section>
+<section class="cyl-sec" id="cyl-sec">
+  <div class="cyl-stage">
+    <div class="cyl-scene">
+      <div class="cyl-cylinder" id="cyl-cylinder">
+        <figure class="cyl-card"><img src="billeder/illu.svg" alt="Step 1"></figure>
+        <figure class="cyl-card"><img src="billeder/photo.svg" alt="Step 2"></figure>
+        <figure class="cyl-card"><img src="billeder/indesign.svg" alt="Step 3"></figure>
+        <figure class="cyl-card"><img src="billeder/premiere.svg" alt="Step 4"></figure>
+        <figure class="cyl-card"><img src="billeder/after.svg" alt="Step 5"></figure>
+        <figure class="cyl-card"><img src="billeder/figma.svg" alt="Step 6"></figure>
+        <figure class="cyl-card"><img src="billeder/visual.svg" alt="Step 7"></figure>
+      </div>
+    </div>
+
+    <!-- Ny tekst -->
+    <p class="cyl-text">De programmer jeg bruger.</p>
+
+  </div>
+</section>
+
+    </div>
+  </div>
+
+</body>
+</html>

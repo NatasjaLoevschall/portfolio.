@@ -1,0 +1,817 @@
+/* -------------------- RESET -------------------- */
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+:root{
+  --sidebar-w: 220px;
+  --line: rgba(0,0,0,.25);
+  --text: #727272;
+  --overlay-bg: rgba(255,255,255,0.88);
+  --pad: 28px;
+}
+
+body{
+  font-family: 'futura-pt', sans-serif;
+  background:#f7f7f7;
+  color:#111;
+}
+
+/* -------------------- LAYOUT -------------------- */
+.layout{
+  min-height: 100vh;
+  display: block; /* drop grid */
+}
+
+/* FAST sidebar */
+.sidebar{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: var(--sidebar-w);
+  height: 100vh;
+
+  border-right: 1px solid var(--line);
+  background: rgba(28,28,28,0.05);
+  padding: var(--pad) 22px;
+
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+
+  z-index: 50;
+}
+
+/* content skubbes til højre for sidebaren */
+.content{
+  margin-left: var(--sidebar-w);
+  display:flex;
+  flex-direction:column;
+}
+
+
+
+.logo a{
+  display:flex;
+  width:100%;
+  height:100%;
+}
+
+.logo img{
+  width:90px;
+  height:90px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.menu{
+  margin-top:60px;
+  display:flex;
+  flex-direction:column;
+  gap:20px;
+}
+
+.menu a{
+  text-decoration:none;
+  font-size:19px;
+  font-weight:200;
+  color:#4b2d41;
+}
+
+.menu a::after {
+    content: "";
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.menu a:hover::after {
+    content: ".";
+    opacity: 1;
+}
+.profile img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+}
+
+/* -------------------- SIDEBAR INTRO (SLIDE OUT VERSION) -------------------- */
+
+/* -------------------- SIDEBAR INTRO (SLIDE WHOLE BOX) -------------------- */
+/* -------------------- SIDEBAR INTRO (MORPH + REVEAL) -------------------- */
+
+/* Sørg for at sidebar kan animeres clean */
+.sidebar{
+  will-change: width, transform;
+}
+
+.sidebar-intro{
+  position: absolute;
+  inset: 0;
+
+  display: flex;              /* brug flex i stedet */
+  flex-direction: column;
+  align-items: center;        /* vandret centrering */
+  justify-content: center;    /* lodret centrering */
+
+  gap: 14px;
+  text-align: center;         /* centrer tekst */
+
+  background: #f7f7f7;
+  z-index: 10;
+
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 250ms ease, visibility 0s linear 250ms;
+}
+
+
+.sidebar-intro-logo{
+  width:120px;
+  height:120px;
+  object-fit:contain;
+}
+
+.sidebar-intro-title{
+  margin:0;
+  font-weight:200;
+  letter-spacing:0.12em;
+  color:#4b2d41;
+  font-size:22px;
+}
+
+/* Intro: lås scroll (valgfrit) */
+body.is-intro{
+  overflow:hidden;
+}
+
+/* Skjul normal sidebar indhold under intro */
+body.is-intro .sidebar .top{
+  opacity:0;
+  visibility:hidden;
+  pointer-events:none;
+}
+
+/* Skjul content under intro */
+body.is-intro .content{
+  opacity:0;
+  visibility:hidden;
+  pointer-events:none;
+}
+
+/* Sidebar starter fullscreen */
+body.is-intro .sidebar{
+  position: fixed;
+  top:0;
+  left:0;
+  height:100vh;
+  width:100vw;
+  z-index:9999;
+  border-right:none;
+
+  /* vi animerer width, så den “åbner” content */
+  transition: width 900ms cubic-bezier(.2,.8,.2,1);
+}
+
+/* Vis intro overlay */
+body.is-intro .sidebar-intro{
+  opacity:1;
+  visibility:visible;
+  transition: opacity 250ms ease, visibility 0s;
+}
+
+/* EXIT: sidebar krymper til normal bredde (reveal content) */
+body.is-intro.is-intro-exit .sidebar{
+  width: var(--sidebar-w);
+  border-right: 1px solid var(--line);
+}
+
+/* Mens den krymper: lad content komme frem (fade in) */
+body.is-intro.is-intro-exit .content{
+  opacity:1;
+  visibility:visible;
+  pointer-events:auto;
+  transition: opacity 450ms ease;
+  margin-left: var(--sidebar-w);
+}
+
+/* Når den krymper: skjul intro overlay */
+body.is-intro.is-intro-exit .sidebar-intro{
+  opacity:0;
+  visibility:hidden;
+  transition: opacity 200ms ease, visibility 0s linear 200ms;
+}
+
+/* DONE: normal state */
+body.is-intro-done{
+  overflow:auto;
+}
+
+body.is-intro-done .sidebar{
+  position: fixed;
+  top:0;
+  left:0;
+  width: var(--sidebar-w);
+  height:100vh;
+  z-index:50;
+
+  border-right: 1px solid var(--line);
+  transition: none;
+}
+
+body.is-intro-done .sidebar .top{
+  opacity:1;
+  visibility:visible;
+  pointer-events:auto;
+  transition: opacity 300ms ease;
+}
+
+body.is-intro-done .content{
+  margin-left: var(--sidebar-w);
+  opacity:1;
+  visibility:visible;
+  pointer-events:auto;
+  transition: none;
+}
+
+
+/* -------------------- CONTENT -------------------- */
+.content{
+  display:flex;
+  flex-direction:column;
+}
+.hero {
+  position: relative;
+  height: 100vh;
+  overflow: visible;
+  background-color: #f0f0f0;
+}
+
+.hero-background {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 80%;
+  height: 80%;
+  object-fit: cover;
+  object-position: center;
+  transform: translate(-50%, -50%);
+}
+
+
+/* Område hvor billederne bevæger sig */
+.floating-images {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 80%;
+  height: 80%;
+  transform: translate(-50%, -50%);
+  overflow: visible;
+  pointer-events: none;
+}
+
+
+/* De små billeder */
+.floating-image {
+  position: absolute;
+
+  width: 125px;
+  height: 155px;
+
+  object-fit: cover;
+
+  /* Giver lidt magazine/foto-look */
+  border: 1px solid white;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+}
+
+.floating-image--large {
+  width: 150px;
+  height: 185px;
+}
+
+.floating-image--bottom {
+  object-position: center bottom;
+}
+
+.floating-image--rotated {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+}
+
+.floating-video {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+  background: transparent;
+}
+
+.floating-video--rotated {
+  transform: rotate(90deg);
+  transform-origin: center center;
+}
+
+/* -------------------- MOCKUPS -------------------- */
+.mockup-area{
+  position: relative;
+  height: 100vh;
+  overflow: hidden;
+  z-index: 0;
+  background-color: #f0f0f0;
+}
+
+.mockup-area.pf-wrapper{
+  height: 100vh;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.mockup-wrap{
+  height: 100%;
+  display: grid;
+  grid-template-columns: 1.1fr 1.9fr;
+  align-items: center;
+  padding-left: 50px;
+  padding-right: 50px;
+}
+
+.mockup-panel img{
+  width: 90%;
+  margin: 0 auto;
+  display:block;
+  align-items: center;
+}
+
+.mockup-panel--slider{
+  --mockup-slider-shift: 0px;
+}
+
+@media (min-width: 901px){
+  .mockup-panel--static img{
+    transform: translateX(16px);
+  }
+
+  .mockup-panel--slider{
+    --mockup-slider-shift: -16px;
+  }
+
+  .mockup-panel--slider #sliderImg{
+    transform: translateX(var(--mockup-slider-shift));
+  }
+}
+
+/* Slider base */
+.mockup-slider{
+  position:relative;
+}
+
+.mockup-slider img{
+  transition: transform .3s ease, filter .3s ease;
+}
+
+/* Hover zoom kun før klik (aldrig i overlay) */
+.mockup-panel--slider:hover .mockup-slider:not(.is-active) #sliderImg{
+  transform: scale(1.02) translateX(var(--mockup-slider-shift));
+  filter: brightness(1.03);
+}
+
+/* Cursor før/efter klik */
+.mockup-slider:not(.is-active) #sliderImg{ cursor: zoom-in; }
+.mockup-slider.is-active #sliderImg{ cursor: default; }
+
+/* -------------------- OVERLAY -------------------- */
+.mockup-slider.is-active{
+  position:absolute;
+  inset:0;
+  height:100%;
+  background: var(--overlay-bg);
+  z-index: 999;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+/* Image inside overlay */
+.mockup-slider.is-active img{
+  width: auto;
+  max-width: 100%;
+  max-height: 100%;
+  margin: 0;
+  object-fit: contain;
+  transform: none;
+}
+
+/* -------------------- PILE & DOTS (ALDRIG synlige før klik) -------------------- */
+.mockup-nav,
+.mockup-dots{
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity .25s ease, color .2s ease;
+}
+
+/* Pile design */
+.mockup-nav{
+  position:absolute;
+  top:50%;
+  transform: translateY(-50%);
+  background:none;
+  border:none;
+  padding:0;
+
+  color:#727272;
+  font-size:48px;
+  line-height:1;
+  cursor:pointer;
+  z-index: 1000;
+}
+
+.mockup-nav--prev{ left: 30px; }
+.mockup-nav--next{ right: 30px; }
+
+.mockup-nav:hover{ color:#111; }
+
+/* Dots */
+.mockup-dots{
+  position:absolute;
+  left:50%;
+  bottom:16px;
+  transform: translateX(-50%);
+  display:flex;
+  gap:8px;
+  z-index: 1000;
+}
+
+.mockup-dot{
+  width:8px;
+  height:8px;
+  border-radius:999px;
+
+  background: white;                 /* hvid indeni */
+  border: 1.5px solid rgba(0,0,0,0.4); /* grå kant */
+}
+
+.mockup-dot.is-active{
+  background: white;
+  border: 1.5px solid #000;          /* mørkere kant når aktiv */
+}
+
+/* Vis KUN i overlay */
+.mockup-slider.is-active .mockup-nav,
+.mockup-slider.is-active .mockup-dots{
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+/* -------------------- KRYDS (kun i overlay) -------------------- */
+.overlay-close{
+  position:absolute;
+  top:24px;
+  right:24px;
+
+  background:none;
+  border:none;
+  padding:0;
+
+  font-size:50px;
+  line-height:1;
+  color:#727272;
+
+  cursor:pointer;
+  z-index: 1001;
+
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity .2s ease, color .2s ease;
+}
+
+.mockup-slider.is-active .overlay-close{
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.overlay-close:hover{ color:#111; }
+
+/* -------------------- FADE-IN VED SCROLL (begge billeder) -------------------- */
+.reveal{
+  opacity: 0;
+  transition: opacity 2000ms ease;
+  will-change: opacity;
+}
+.reveal.is-visible{ opacity: 1; }
+
+/* -------------------- RESPONSIVE -------------------- */
+@media (max-width: 900px){
+  .mockup-wrap{ grid-template-columns: 1fr; }
+}
+
+@media (max-width: 700px){
+  .layout{ grid-template-columns: 1fr; }
+
+  .sidebar{
+    border-right: none;
+    border-bottom: 1px solid var(--line);
+    flex-direction: row;
+    align-items: center;
+    gap: 18px;
+  }
+
+  .menu{ margin-top: 0; }
+
+  .profile img{
+    width: 90px;
+    height: 120px;
+  }
+}
+
+/* =========================
+   STAGE (giver scroll-længde)
+   ========================= */
+.pf-stage{
+  --pf-reveal-distance: 420px; /* JS overskriver */
+  height: calc(100vh + var(--pf-reveal-distance));
+  position: relative;
+}
+
+/* =========================
+   PORTFOLIO KARRUSEL WRAPPER (PINNED)
+   ========================= */
+.pf-wrapper{
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow: hidden;
+  display:flex;
+  align-items: flex-start;
+  background-color: #f0f0f0;
+}
+
+.pf-wrapper .pf-grid.pf-carousel {
+  padding-bottom: 0;
+}
+
+/* =========================
+   OVERLAY (LIGGER OVENPÅ)
+   ========================= */
+.pf-overlay{
+  position: absolute;
+  inset: 0;
+  background: #5c5c5f4e;
+  z-index: 5;
+
+  transform: translateX(0px);
+  will-change: transform;
+  pointer-events: none;
+}
+
+.pf-overlay-title{
+  position: absolute;
+  padding-left: 30px;
+  padding-top: 30px;
+  margin: 0;
+
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+
+  font-weight: 200;
+  letter-spacing: 0.08em;
+  color: #fff;
+
+  font-size: 22px;
+  line-height: 0.95;
+}
+.pf-overlay-right{
+  position: absolute;
+  top: 70px;          /* matcher din venstre tekst */
+  left: 30px;        /* matcher din padding */
+
+  font-weight: 200;
+  letter-spacing: 0.08em;
+  font-size: 14px;
+  color: #fff;
+  font-style: italic;
+}
+
+
+.pf-overlay-title span{ display:block; }
+
+/* =========================
+   GALLERI: 3 kort – samme start-højde på thumbnails
+   ========================= */
+
+/* KARRUSEL LAYOUT */
+.pf-grid.pf-carousel{
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 24px;
+
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+
+  padding: 80px 80px 60px;
+  box-sizing: border-box;
+
+  overflow-x: auto;
+  overflow-y: hidden;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.pf-grid.pf-carousel::-webkit-scrollbar{ display:none; }
+
+/* KORT: mindre og mere luft */
+.pf-card{
+  flex: 0 0 calc((100% - 96px) / 3);
+  padding: 16px;
+  box-sizing: border-box;
+
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+
+  text-decoration: none;
+  color: inherit;
+}
+
+/* BILLEDE/VIDEO BLOK: LÅST 1:1 og altid øverst */
+.pf-video-wrapper{
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  position: relative;
+  overflow: hidden;
+  display: block;
+}
+
+/* hvis du nogle gange bruger img direkte uden video-wrapper */
+.pf-img{
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  display: block;
+}
+
+/* Hover video assets */
+.pf-video-thumb,
+.pf-hover-video{
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Hover fade */
+.pf-hover-video{
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+.pf-hover-video--bottom{
+  object-fit: cover;
+  object-position: center bottom;
+}
+.pf-video-wrapper:hover .pf-hover-video{ opacity: 1; }
+.pf-video-wrapper:hover .pf-video-thumb{ opacity: 0; }
+
+/* TEKST: starter ens og kan ikke skubbe thumbnail */
+.pf-title{
+  font-size: 18px;
+  font-weight: 500;
+  margin: 12px 0 6px;
+  color: #000000b5;
+}
+
+.pf-text{
+  font-size: 14px;
+  margin: 0;
+  opacity: 0.7;
+  line-height: 1.35;
+  min-height: calc(7 * 1.35em);
+
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 7;
+  overflow: hidden;
+}
+
+/* Hover scale off */
+.pf-card:hover,
+.pf-card:hover *{
+  transform: none !important;
+}
+
+/* RESPONSIVE */
+@media (max-width: 1000px){
+  .pf-card{
+    flex-basis: 56%;
+  }
+}
+
+@media (max-width: 600px){
+  .pf-grid.pf-carousel{
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .pf-card{
+    flex-basis: 76%;
+  }
+}
+
+/* -------------------- CYLINDER SECTION (KUN ÉN GANG) -------------------- */
+.cyl-sec{
+  height: calc(40vh + 60px);
+  padding-top: 60px;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  background-color: #f0f0f0;
+}
+
+.cyl-scene{
+  width: min(1100px, 50vw);
+  height: 100%;
+  position: relative;
+  perspective: 1200px;
+  perspective-origin: 50% 45%;
+  transform: translateY(40px);
+}
+.cyl-stage{
+  display: flex;
+  flex-direction: column;
+  align-items: center;   /* <-- centrerer teksten horisontalt ift cylinderen */
+  justify-content: center;
+  grid-gap: 150px;
+}
+
+
+.cyl-cylinder{
+  --radius: 180px;
+  --tiltX: -5deg; /* du havde -4 og -5 – jeg valgte -5 */
+
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  inset: 0;
+
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+.cyl-card{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+
+  width: min(160px, 4vw);
+  aspect-ratio: 1 / 1;
+
+  transform-style: preserve-3d;
+
+  margin: 0;
+  border-radius: 0px;
+  overflow: hidden;
+}
+
+.cyl-card img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+@media (max-width: 700px){
+  .cyl-scene{
+    height: min(520px, 68vh);
+    perspective: 900px;
+  }
+  .cyl-cylinder{ --radius: 360px; }
+  .cyl-card{ width: min(420px, 78vw); }
+}
+
+@media (prefers-reduced-motion: reduce){
+  .cyl-cylinder{ will-change: auto; }
+}
+
+.cyl-text{
+  
+  text-align: center;
+  font-size: 16px;
+  letter-spacing: 1px;
+  opacity: 0.7;
+}

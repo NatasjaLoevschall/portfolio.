@@ -1,0 +1,443 @@
+/* --------------------
+   RESET
+-------------------- */
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+body{
+  font-family: "futura-pt", sans-serif;
+  background:#f7f7f7;
+  color:#111;
+
+}
+
+/* --------------------
+   LAYOUT
+-------------------- */
+.layout{
+  min-height:100vh;
+  display:grid;
+  grid-template-columns: 220px 1fr;
+}
+
+/* --------------------
+   SIDEBAR (sticky)
+-------------------- */
+.sidebar{
+  border-right: 1px solid rgba(0,0,0,.25);
+  background: rgba(28,28,28,0.05);
+  padding: 28px 22px;
+
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+
+  position: sticky;
+  top: 0;
+  height: 100vh;
+}
+
+.logo a{
+  display: flex;
+  width: 100%;
+  height: 100%;
+}
+
+.logo img{
+  width:90px;
+  height:90px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.menu{
+  margin-top:60px;
+  display:flex;
+  flex-direction:column;
+  gap:20px;
+}
+
+.menu a{
+  text-decoration:none;
+  font-size:19px;
+  font-weight:200;
+  color:#4b2d41;
+}
+
+.menu a::after {
+    content: "";
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.menu a:hover::after {
+    content: ".";
+    opacity: 1;
+}
+
+.profile img{
+  width: 100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+}
+/* --------------------
+   CONTENT
+-------------------- */
+.content{
+  display:flex;
+  flex-direction:column;
+}
+
+/* =========================
+   STAGE (giver scroll-længde)
+   ========================= */
+.pf-stage{
+  --pf-reveal-distance: 420px; /* JS overskriver */
+  height: calc(100vh + var(--pf-reveal-distance));
+  position: relative;
+}
+
+/* =========================
+   PORTFOLIO KARRUSEL WRAPPER (PINNED)
+   ========================= */
+.pf-wrapper{
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow:hidden;
+  display:flex;
+  align-items: flex-start;
+   background-color: #f0f0f0; /* flyt hertil */
+}
+
+.pf-wrapper .pf-grid.pf-carousel {
+  padding-bottom: 0;
+}
+
+/* =========================
+   OVERLAY (LIGGER OVENPÅ)
+   ========================= */
+.pf-overlay{
+  position: absolute;
+  inset: 0;
+  background:  #5c5c5f4e;
+  z-index: 5;
+
+  transform: translateX(0px);
+  will-change: transform;
+  pointer-events: none;
+}
+
+.pf-overlay-title{
+  position: absolute;
+  padding-left: 30px;
+  padding-top: 30px;
+  margin: 0;
+
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+
+  font-weight: 200;
+  letter-spacing: 0.08em;
+  color: #fff;
+
+  font-size: 22px;
+  line-height: 0.95;
+}
+.pf-overlay-right{
+  position: absolute;
+  top: 70px;          /* matcher din venstre tekst */
+  left: 30px;        /* matcher din padding */
+
+  font-weight: 200;
+  letter-spacing: 0.08em;
+  font-size: 14px;
+  color: #fff;
+  font-style: italic;
+}
+
+
+.pf-overlay-title span{ display:block; }
+
+/* =========================
+   GALLERI: 3 kort – samme start-højde på thumbnails
+   ========================= */
+
+/* KARRUSEL LAYOUT */
+.pf-grid.pf-carousel{
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 24px;
+
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+
+  padding: 80px 80px 60px;
+  box-sizing: border-box;
+
+  /* så den kan scrolles horisontalt hvis pladsen er mindre */
+  overflow-x: auto;
+  overflow-y: hidden;
+
+  /* skjul scrollbar men behold scrolling */
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.pf-grid.pf-carousel::-webkit-scrollbar{ display:none; }
+
+/* KORT: gør det til en kolonne (vigtigt!) */
+.pf-card{
+  /* 3 kort på række på desktop */
+  flex: 0 0 calc((100% - 32px) / 3); /* 2 gaps á 16px = 32px */
+
+  padding: 16px;
+  box-sizing: border-box;
+
+  display: flex;            /* VIGTIG */
+  flex-direction: column;   /* VIGTIG */
+  align-items: stretch;     /* VIGTIG */
+
+  text-decoration: none;
+  color: inherit;
+}
+
+/* BILLEDE/VIDEO BLOK: LÅST 1:1 og altid øverst */
+.pf-video-wrapper{
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  position: relative;
+  overflow: hidden;
+  display: block;
+}
+
+/* hvis du nogle gange bruger img direkte uden video-wrapper */
+.pf-img{
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  display: block;
+}
+
+/* Hover video assets */
+.pf-video-thumb,
+.pf-hover-video{
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Hover fade */
+.pf-hover-video{
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+.pf-hover-video--bottom{
+  object-fit: cover;
+  object-position: center bottom;
+}
+.pf-video-wrapper:hover .pf-hover-video{ opacity: 1; }
+.pf-video-wrapper:hover .pf-video-thumb{ opacity: 0; }
+
+/* TEKST: starter ens og kan ikke skubbe thumbnail */
+.pf-title{
+  font-size: 19px;
+  font-weight: 500;
+  margin: 14px 0 6px;
+  color: #000000b5;
+}
+
+.pf-text{
+  font-size: 16px;
+  margin: 0;
+  opacity: 0.7;
+  line-height: 1.4;
+
+  /* NØGLEN: samme teksthøjde på alle kort */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 10;  /* vælg fx 5–8 linjer */
+  overflow: hidden;
+}
+
+/* Hover scale off */
+.pf-card:hover,
+.pf-card:hover *{
+  transform: none !important;
+}
+
+/* RESPONSIVE */
+@media (max-width: 1000px){
+  .pf-card{ flex: 0 0 60%; }
+}
+
+@media (max-width: 600px){
+  .pf-grid.pf-carousel{
+    padding-left: 20px;
+    padding-right: 20px;
+    scroll-padding-left: 20px;
+    scroll-padding-right: 20px;
+  }
+  .pf-card{ flex: 0 0 80%; }
+}
+/* -------------------- CYLINDER SECTION (KUN ÉN GANG) -------------------- */
+.cyl-sec{
+  height: 40vh; /* du havde både 30vh og 40vh – jeg valgte 40vh */
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  background-color: #f0f0f0;
+}
+
+.cyl-scene{
+  width: min(1100px, 50vw);
+  height: 100%;
+  position: relative;
+  perspective: 1200px;
+  perspective-origin: 50% 45%;
+  transform: translateY(40px);
+}
+.cyl-stage{
+  display: flex;
+  flex-direction: column;
+  align-items: center;   /* <-- centrerer teksten horisontalt ift cylinderen */
+  justify-content: center;
+  grid-gap: 150px;
+}
+
+
+.cyl-cylinder{
+  --radius: 180px;
+  --tiltX: -5deg; /* du havde -4 og -5 – jeg valgte -5 */
+
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  inset: 0;
+
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+.cyl-card{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+
+  width: min(160px, 4vw);
+  aspect-ratio: 1 / 1;
+
+  transform-style: preserve-3d;
+
+  margin: 0;
+  border-radius: 0px;
+  overflow: hidden;
+}
+
+.cyl-card img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+@media (max-width: 700px){
+  .cyl-scene{
+    height: min(520px, 68vh);
+    perspective: 900px;
+  }
+  .cyl-cylinder{ --radius: 360px; }
+  .cyl-card{ width: min(420px, 78vw); }
+}
+
+@media (prefers-reduced-motion: reduce){
+  .cyl-cylinder{ will-change: auto; }
+}
+
+.cyl-text{
+  
+  text-align: center;
+  font-size: 16px;
+  letter-spacing: 1px;
+  opacity: 0.7;
+}
+
+/* Projects page carousel matches the homepage layout without its overlay. */
+.pf-stage--projects{
+  height: calc(100vh + var(--pf-reveal-distance, 420px));
+}
+
+.pf-stage--projects .pf-wrapper{
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  min-height: 0;
+  overflow: hidden;
+  display: flex;
+  align-items: flex-start;
+  background-color: #f0f0f0;
+}
+
+.pf-stage--projects .pf-grid.pf-carousel{
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 24px;
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 80px 80px 60px;
+  box-sizing: border-box;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.pf-stage--projects .pf-grid.pf-carousel::-webkit-scrollbar{
+  display: none;
+}
+
+.pf-stage--projects .pf-card{
+  flex: 0 0 calc((100% - 96px) / 3);
+  padding: 16px;
+}
+
+.pf-stage--projects .pf-title{
+  font-size: 18px;
+  margin: 12px 0 6px;
+}
+
+.pf-stage--projects .pf-text{
+  min-height: calc(7 * 1.35em);
+  font-size: 14px;
+  line-height: 1.35;
+  -webkit-line-clamp: 7;
+}
+
+@media (max-width: 1000px){
+  .pf-stage--projects .pf-card{
+    flex-basis: 56%;
+  }
+}
+
+@media (max-width: 600px){
+  .pf-stage--projects .pf-grid.pf-carousel{
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .pf-stage--projects .pf-card{
+    flex-basis: 76%;
+  }
+}

@@ -1,0 +1,695 @@
+/* --------------------
+   RESET
+-------------------- */
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+body{
+  font-family: "futura-pt", sans-serif;
+  background:#fbfbfb;
+  color:#111;
+
+}
+
+/* --------------------
+   LAYOUT
+-------------------- */
+.layout{
+  min-height:100vh;
+  display:grid;
+  grid-template-columns: 220px 1fr;
+}
+
+/* --------------------
+   SIDEBAR (sticky)
+-------------------- */
+.sidebar{
+  border-right: 1px solid rgba(0,0,0,.25);
+  background: rgba(28,28,28,0.05);
+  padding: 28px 22px;
+
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+
+  position: sticky;
+  top: 0;
+  height: 100vh;
+}
+
+.logo a{
+  display: flex;
+  width: 100%;
+  height: 100%;
+}
+
+.logo img{
+  width:90px;
+  height:90px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.menu{
+  margin-top:60px;
+  display:flex;
+  flex-direction:column;
+  gap:20px;
+}
+
+.menu a{
+  text-decoration:none;
+  font-size:19px;
+  font-weight:200;
+  color:#4b2d41;
+}
+
+.menu a::after {
+    content: "";
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.menu a:hover::after {
+    content: ".";
+    opacity: 1;
+}
+
+.profile img{
+  width: 100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+}
+/* --------------------
+   CONTENT
+-------------------- */
+.content{
+  display:flex;
+  flex-direction:column;
+}
+
+/* --------------------
+   HERO VIDEO (fuld skærm)
+-------------------- */
+.hero{
+  position:relative;
+  height:100vh;
+  overflow:hidden;
+  transform: scale(0.9);
+}
+
+
+.content-video{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  object-position:right center;
+}
+
+/* ======================================================
+   HERO SPLIT (NEW, STABLE, NO JUMP)
+   - scale(0.9) ligger på indre wrapper
+   - tekst venstre, video helt til højre
+====================================================== */
+
+.hero--split{
+  background: #fbfbfb;
+  height: 90vh;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  overflow: hidden;
+
+  /* 👇 skaler hele sektionen */
+  transform: scale(0.9);
+  transform-origin: center;
+
+}
+
+/* Indre wrapper der skaleres (så layout ikke hopper) */
+.hero-split{
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+
+}
+
+/* Venstre side */
+.hero-split__text{
+  padding-left: clamp(40px, 6vw, 110px);
+  padding-right: 40px;
+  
+}
+
+.hero-split__title{
+  width: min(320px, 65%);
+  height: auto;
+  display: block;
+  margin-bottom: 24px;
+  object-fit: contain;
+}
+
+.hero-split__text p{
+  margin: 0;
+  font-size: 18px;
+  line-height: 1.6;
+  font-weight: 100;
+  opacity: 0.8;
+}
+
+/* Højre side */
+.hero-split__media{
+  display: flex;
+  justify-content: flex-end;
+  padding-right: clamp(40px, 6vw, 110px);
+}
+
+/* Kvadratisk frame til video */
+.hero-split__frame{
+  width: 85%;
+  aspect-ratio: 1 / 1;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-split__frame video{
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* ======================================================
+   RESPONSIVE
+====================================================== */
+@media (max-width: 900px){
+  .hero--split{
+    min-height: auto;
+    padding: 60px 20px;
+  }
+
+  .hero-split{
+    grid-template-columns: 1fr;
+    transform: none; /* fjern scale på mobil */
+    gap: 42px;
+  }
+
+  .hero-split__text{
+    padding-left: 0;
+    max-width: 680px;
+  }
+
+  .hero-split__media{
+    padding-right: 0;
+    justify-content: center;
+  }
+
+  .hero-split__frame{
+    width: min(420px, 86vw);
+  }
+}
+
+/* --------------------
+   RESPONSIVE
+-------------------- */
+@media (max-width: 900px){
+  .layout{
+    grid-template-columns: 1fr;
+  }
+
+  .sidebar{
+    position: static;
+    height: auto;
+    border-right: none;
+    border-bottom: 1px solid rgba(0,0,0,.25);
+    flex-direction: row;
+    align-items: center;
+    gap: 18px;
+  }
+
+  .menu{
+    margin-top: 0;
+    flex-direction: row;
+    gap: 14px;
+  }
+
+  .menu a{
+    font-size: 18px;
+  }
+
+  .profile img{
+    width: 90px;
+    height: 120px;
+  }
+
+  .hero--split{
+    height: auto;
+    grid-template-columns: 1fr;
+    padding: 48px;
+    gap: 48px;
+  }
+
+  .hero--split .hero-video{
+    width: 100%;
+    max-width: 360px;
+    justify-self: center;
+  }
+}
+
+/* --------------------
+   REDUCED MOTION
+-------------------- */
+@media (prefers-reduced-motion: reduce){
+  .content-video{
+    transform: none;
+  }
+}
+.materialer{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  object-position:right center;
+}
+
+.hero--full{
+  height: 100vh;
+  position: relative;
+  overflow: hidden;
+}
+
+.pf-stage{
+  --pf-reveal-distance: 420px;
+  height: calc(100vh + var(--pf-reveal-distance));
+  position: relative;
+  
+}
+
+.pf-wrapper{
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  margin-top: 70px;
+  overflow: hidden;
+  display: flex;
+  align-items: stretch;
+   transform: scale(0.9);
+}
+
+.pf-overlay{
+  position: absolute;
+  inset: 0;
+  background: #0c0f1739;
+  z-index: 5;
+  transform: translateX(0px);
+  will-change: transform;
+  pointer-events: none;
+ 
+}
+
+.pf-overlay-title{
+  position: absolute;
+  padding: 60px;
+  margin: 0;
+
+  display: flex;
+  gap: 8px;
+
+  font-family: "prestige-elite-std", monospace;
+  color: hsl(0, 0%, 100%);
+  font-size: 26px;
+  font-weight: 100;
+}
+.pf-overlay-title span{ display:block; }
+
+/* VIDEO */
+.pf-media{
+  width: 100%;
+  height: 100%;
+  background: #fff;        /* hvid baggrund når video er zoomet ud */
+  overflow: hidden;
+}
+
+.pf-video{
+  width: 100%;
+  height: 100vh;
+  object-fit: contain;     /* så du kan se hvid baggrund */
+  display: block;
+  transform-origin: center;
+}
+
+@media (max-width: 600px){
+  .pf-overlay-title{
+    left: 20px;
+    top: 20px;
+    font-size: clamp(26px, 7vw, 40px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce){
+  .pf-overlay{ will-change: auto; }
+}
+/* 100vh sektion */
+.vh-intro-video{
+  min-height: 100vh;
+  background: #fbfbfb; /* lys grå */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px 20px;
+  box-sizing: border-box;
+}
+
+/* container */
+.vh-intro-video__inner{
+  width: min(420px, 70vw);
+  aspect-ratio: 1 / 1; /* kvadratisk som på dit screenshot */
+  background: #fff;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* selve videoen */
+.vh-intro-video__media{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  
+}
+.mk-fullvh-video{
+  height: 100vh;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  background: #000;
+  transform: scale(0.9);
+
+}
+
+.mk-fullvh-video__media{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* 100vh sektion */
+.cyl-sec{
+  height: 50vh;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+}
+
+/* "scene" med perspektiv */
+.cyl-scene{
+  width: min(1100px, 50vw);
+  height: 100%;             /* 👈 i stedet for min(650px, 72vh) */
+  position: relative;
+  perspective: 1200px;
+  perspective-origin: 50% 45%;
+  transform: translateY(-30px);
+}
+
+/* cylinder-wrapper */
+.cyl-cylinder{
+  --radius: 200px;
+  --tiltX: -3deg;
+
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  inset: 0;
+
+  transform-style: preserve-3d;
+
+  /* 👇 flyt cylinderen op */
+
+
+  will-change: transform;
+}
+
+/* card */
+.cyl-card{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  
+width: min(200px, 5vw);
+aspect-ratio: 3 / 4;
+
+
+  transform-style: preserve-3d;
+
+  margin: 0;
+  border-radius: 0px; /* eller 14px hvis du vil have blødere look */
+  overflow: hidden;
+
+  /* let “poster” feel */
+  box-shadow: 0 28px 70px rgba(0,0,0,.18);
+}
+
+/* billede fylder card */
+.cyl-card img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* mobil tweaks */
+@media (max-width: 700px){
+  .cyl-scene{
+    height: min(520px, 68vh);
+    perspective: 900px;
+  }
+  .cyl-cylinder{ --radius: 360px; }
+  .cyl-card{ width: min(420px, 78vw); }
+}
+
+/* reduced motion */
+@media (prefers-reduced-motion: reduce){
+  .cyl-cylinder{ will-change: auto; }
+}
+
+
+/* ======================================================
+   FF-SPLIT – FULL WIDTH + SCALE 0.9
+====================================================== */
+
+.ff-split{
+   min-height: 90vh;   /* i stedet for height */
+  padding-bottom: 50px; /* 👈 mere white space under */
+  background: #fbfbfb;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  overflow: hidden;
+
+  /* 👇 skaler hele sektionen */
+  transform: scale(0.9);
+  transform-origin: center;
+}
+
+/* container fylder 100% */
+.ff-split__inner{
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+}
+
+/* VENSTRE SIDE – tekst helt til venstre */
+.ff-split__left{
+  padding-left: clamp(40px, 6vw, 110px);
+  max-width: 600px;
+}
+
+/* tekst styling */
+.overskrift2{
+  width: 85%;
+  height: auto;
+  object-fit: contain;
+  margin-bottom: 24px;
+}
+
+.ff-split__text{
+  margin: 0;
+  font-weight: 200;
+  font-size: 18px;
+  line-height: 1.65;
+  color: rgba(17,17,17,0.78);
+  font-style: italic;
+}
+
+/* HØJRE SIDE – video helt til højre */
+.ff-split__right{
+  display: flex;
+  justify-content: flex-end;
+  padding-right: clamp(40px, 6vw, 110px);
+}
+
+.ff-split__videoFrame{
+  width: min(420px, 36vw);
+  aspect-ratio: 3/4;
+  background: #000;
+  overflow: hidden;
+}
+
+.ff-split__video{
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  transform: scale(1.006);
+  
+}
+
+/* ======================================================
+   RESPONSIVE
+====================================================== */
+@media (max-width: 900px){
+
+  .ff-split{
+    transform: scale(1); /* 👈 fjern scale på mobil */
+    padding: 60px 20px;
+  }
+
+  .ff-split__inner{
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .ff-split__left{
+    padding-left: 0;
+    max-width: 680px;
+  }
+
+  .ff-split__right{
+    padding-right: 0;
+    justify-content: center;
+  }
+
+  .ff-split__videoFrame{
+    width: min(420px, 86vw);
+  }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce){
+  .ff-split__video{ will-change: auto; }
+}
+
+
+/* ===== PRE-CYL GALLERY: AUTO-ZOOM ON CENTER ===== */
+.content { min-width: 0; }
+
+.pre-cyl-gallery{
+  width: 100%;
+  height: 88vh;
+  max-width: 100%;
+  padding: 20px 0 20px;
+
+  --thumbW: min(320px, 70vw);
+  --thumbH: min(460px, 95vw);
+  --gap: 18px;
+
+  --leftSpace: clamp(40px, 6vw, 140px);
+
+  --scaleIdle: 1;        /* normal */
+  --scaleActive: 1.06;   /* zoom når i fokus (prøv 1.04–1.08) */
+}
+
+.pre-cyl-gallery__track{
+  display: flex;
+  align-items: center;
+  gap: 20px;
+
+  padding: 34px 40px 0px 40px; /* 👈 kun lidt luft */
+
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+}
+
+.pre-cyl-gallery__track::-webkit-scrollbar{ display:none; }
+
+/* SLET DISSE HELT:
+.pre-cyl-gallery__track::before { ... }
+.pre-cyl-gallery__track::after { ... }
+*/
+
+
+
+/* hver “celle” */
+.pre-cyl-gallery__cell{
+  flex: 0 0 auto;
+  width: var(--thumbW);
+  height: var(--thumbH);
+
+  scroll-snap-align: center; /* 👈 vigtigt for “scrollet til” feeling */
+  position: relative;
+
+  transform: scale(var(--scaleIdle));
+  transform-origin: center;
+  transition: transform 220ms cubic-bezier(.2,.8,.2,1);
+  will-change: transform;
+}
+
+/* aktiv (i fokus) */
+.pre-cyl-gallery__cell.is-active{
+  transform: scale(var(--scaleActive));
+  z-index: 10;
+}
+
+/* knappen/boksen */
+.pre-cyl-gallery__item{
+  width: 100%;
+  height: 100%;
+  border: 0;
+  padding: 0;
+  background: transparent;
+  cursor: grab;
+  overflow: hidden;
+  display: block;
+}
+.pre-cyl-gallery__item:active{ cursor: grabbing; }
+
+.pre-cyl-gallery__item img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.barvid{
+  height: 40px;
+  overflow: hidden;
+  background-color: #fbfbfb;
+}
+
+.barvid__video{
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  
+}

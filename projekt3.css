@@ -1,0 +1,486 @@
+/* --------------------
+   RESET
+-------------------- */
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+body{
+  font-family: "futura-pt", sans-serif;
+  color:#111;
+
+}
+
+/* --------------------
+   LAYOUT
+-------------------- */
+.layout{
+  min-height:100vh;
+  display:grid;
+  grid-template-columns: 220px 1fr;
+}
+
+/* --------------------
+   SIDEBAR (sticky)
+-------------------- */
+.sidebar{
+  border-right: 1px solid rgba(0,0,0,.25);
+  background: rgba(28,28,28,0.05);
+  padding: 28px 22px;
+
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+
+  position: sticky;
+  top: 0;
+  height: 100vh;
+}
+
+.logo a{
+  display: flex;
+  width: 100%;
+  height: 100%;
+}
+
+.logo img{
+  width:90px;
+  height:90px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+.menu{
+  margin-top:60px;
+  display:flex;
+  flex-direction:column;
+  gap:20px;
+}
+
+.menu a{
+  text-decoration:none;
+  font-size:19px;
+  font-weight:200;
+  color:#4b2d41;
+}
+
+.menu a::after {
+    content: "";
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.menu a:hover::after {
+    content: ".";
+    opacity: 1;
+}
+.profile img{
+  width: 100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+}
+/* --------------------
+   CONTENT
+-------------------- */
+.content{
+  display:flex;
+  flex-direction:column;
+  background-color: #ccc6c2;
+}
+  
+
+
+/* --------------------
+   HERO VIDEO (fuld skærm)
+-------------------- */
+.hero{
+  position:relative;
+  height:100vh;
+  overflow:hidden;
+}
+
+
+.content-video{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  object-position:right center;
+  transform: scale(1.01);
+}
+
+.full-img{
+  position: relative;
+  height: 100vh;
+  width: 100%;
+  overflow: hidden;
+}
+
+.full-img img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
+
+/* Tekst ovenpå */
+.full-img-content{
+  width: 38%;
+ position: absolute;
+ top: 15%;
+  left: 6%;
+  color: #5b4a43;
+  max-width: 40%;
+}
+
+.full-img-content h2{
+  font-size: 25px;
+    font-weight: 600;
+  color: #473b36c3;
+  margin-bottom: 16px;
+}
+
+.full-img-content p{
+  font-size: 18px;
+  font-weight: 100;
+  line-height: 1.5;
+}
+
+.fade-in{
+  opacity: 0;
+  transform: translateY(40px);
+  transition: 
+    opacity 1200ms ease,
+    transform 1200ms ease;
+}
+
+.fade-in.is-visible{
+  opacity: 1;
+  transform: translateY(0);
+}
+.center-image-section {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;  /* Centrerer wrapperen */
+  align-items: center;
+}
+
+/* Wrapper styrer bredden */
+.content-wrapper {
+  width: 64%;              /* Samme bredde som billedet */
+}
+
+/* Overskrift */
+.side-title {
+  font-size: 27px;
+  font-weight: 300;
+  color: #5b4a43;
+  text-align: left;        /* <-- Nu står den til venstre */
+  margin-bottom: 20px;
+}
+
+/* Billede */
+.content-wrapper img {
+  width: 100%;             /* Fylder wrapperen */
+  height: auto;
+  display: block;
+}
+
+/* ========== Square Gallery (2 rækker á 3) ========== */
+.square-gallery{
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+}
+
+.square-gallery__grid{
+  width: 64%;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 34px;
+}
+
+/* Kvadratiske thumbnails */
+.square-gallery__grid img{
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  display: block;
+
+  border-radius: 18px;                 /* afrundede hjørner som dit billede */
+  background: rgba(255,255,255,0.35);  /* hvis billeder loader langsomt */
+  
+  transition: transform 0.35s cubic-bezier(.2,.8,.2,1),
+              box-shadow 0.35s ease;
+}
+
+
+/* Hover */
+.square-gallery__grid img:hover{
+  transform: scale(1.06);
+  box-shadow: 0 12px 30px rgba(0,0,0,0.12);
+}
+
+@media (max-width: 900px){
+  .square-gallery__grid{
+    grid-template-columns: repeat(2, 1fr);
+    gap: 18px;
+  }
+}
+
+
+@media (max-width: 520px){
+  .square-gallery__grid{
+    grid-template-columns: 1fr;
+  }
+}
+.full-img2{
+  position: relative;
+  height: 100vh;
+  width: 100%;
+  overflow: hidden;
+}
+
+/* KUN baggrundsbilledet fylder hele sektionen */
+.full-img2 .bg-image{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+/* Overlay billede */
+.overlay-image4{
+  position: absolute;
+  top:0%;
+  left: 30%;
+
+  width: 31%;       /* Justér størrelse her */
+  height: auto;
+  z-index: 2;
+}
+.section-text {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  max-width: 580px;
+  text-align: center;
+  color: #5b4a43;
+  z-index: 3;
+  padding: 0 20px;
+}
+
+
+.section-text h2{
+  font-size: 25px;
+  margin-bottom: 15px;
+  font-weight: 600;
+  color: #473b36c3;
+
+}
+
+.section-text p{
+  font-size: 18px;
+  line-height: 1.5;
+  font-weight: 100;
+}
+.afslutning{
+  position: absolute;
+  color:#9b9490;
+ bottom: 5%;
+  left: 50%;
+  text-align: center;
+  transform: translateX(-50%);
+}
+
+/* Bamse */
+
+#teddy-default {
+  position: fixed;   /* Følger med ved scroll */
+  right: 40px;
+  bottom: -90px;         /* Fast i bunden af viewport */
+  width: 140px;
+  cursor: pointer;
+  z-index: 1000;
+  transition: bottom 0.35s ease;
+}
+
+#teddy-default img {
+  display: block; /* Fjerner luft */
+  max-height: 300px; /*Sætter en grænse på max højde */
+}
+
+
+
+
+
+.reveal-section{
+  position: relative;
+  overflow: hidden;
+}
+
+.section-overlay{
+  position: absolute;
+  inset: 0;
+  background: #ccc6c2e8;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 20;
+
+  opacity: 1;
+  transition: opacity 1s ease;
+}
+.section-overlay h2{
+  font-size: 40px;
+  font-weight: 600;
+  color: #ffffff;
+ font-style: uppercase;
+
+}
+/* Når den skal forsvinde */
+.section-overlay.is-hidden{
+  opacity: 0;
+  pointer-events: none;
+}
+
+/*RESPONSIVE*/
+/* =========================
+   RESPONSIVE: Sidebar -> Topbar
+   ========================= */
+
+
+
+/* 2) Tablet og ned (sidebar op i toppen) */
+@media (max-width: 900px){
+
+  /* Layout: fra 2 kolonner til 1 kolonne */
+  .layout{
+    grid-template-columns: 1fr;
+  }
+
+  /* Sidebar bliver topbar */
+  .sidebar{
+    position: sticky;
+    top: 0;
+    height: auto;
+    border-right: none;
+    border-bottom: 1px solid rgba(0,0,0,.25);
+
+    padding: 14px 16px;
+
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+
+    z-index: 2000;
+    backdrop-filter: blur(8px); /* valgfrit */
+  }
+  
+  .section-overlay{
+    display: none;
+  }
+
+  /* Fjern "justify-content: space-between" fra .top-opbygningen */
+  .sidebar .top{
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  /* Logo mindre */
+  .logo img{
+    width: 56px;
+    height: 56px;
+  }
+
+  /* Menu vandret */
+  .menu{
+    margin-top: 0;
+    flex-direction: row;
+    gap: 16px;
+    align-items: center;
+    justify-content: flex-end;
+  }
+
+  .menu a{
+    font-size: 16px;
+    font-weight: 300;
+    white-space: nowrap;
+  }
+
+  /* Content: lidt luft */
+  .content{
+    padding-bottom: 30px;
+  }
+
+  /* HERO: behold fuld højde, men tryg på mobile adresselinjer */
+  .hero, .full-img, .full-img2{
+    height: 100svh; /* bedre på mobile end 100vh */
+  }
+
+  /* Tekst overlays: gør dem mindre aggressive */
+  .full-img-content{
+    width: min(560px, 92%);
+    left: 16px;
+    right: 16px;
+    top: 8%;
+    max-width: none;
+  }
+
+  /* Wrapper-sektioner: mere flydende bredde */
+  .content-wrapper{
+    width: min(860px, 92%);
+  }
+
+  .square-gallery__grid{
+    width: min(860px, 92%);
+    grid-template-columns: repeat(2, 1fr);
+    gap: 18px;
+  }
+
+  /* Section tekst: lidt ned fra toppen */
+  .section-text{
+    max-width: min(580px, 92%);
+    top: 6%;
+    
+  }
+}
+/* 3) Telefon (endnu mere stramt) */
+@media (max-width: 520px){
+
+  .menu a{
+    font-size: 14px;
+  }
+
+  .full-img-content h2,
+  .section-text h2{
+    font-size: 20px;
+  }
+
+  .full-img-content p,
+  .section-text p{
+    font-size: 16px;
+  }
+
+  .square-gallery__grid{
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  .afslutning{
+    left: 50%;
+    bottom: 3%;
+    padding: 0 14px;
+  }
+}
