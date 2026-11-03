@@ -407,6 +407,10 @@ body{
   display: block;
 }
 
+.mk-fullvh-video--walk .mk-fullvh-video__media{
+  transform: scale(1.05);
+}
+
 /* 100vh sektion */
 .cyl-sec{
   height: 50vh;
